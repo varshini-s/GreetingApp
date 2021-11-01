@@ -35,10 +35,29 @@ public class GreetingService implements IGreetingService
 		return greetingRepository.findById(id).get();
 	}
 	
-
 	@Override
 	public List<Greeting> getGreetingList()
 	{
 		return greetingRepository.findAll();		
 		
 	}
+	
+	@Override
+	public Greeting editGreeting(String name1,String name2)
+	{
+		List<Greeting> greetingList=greetingRepository.findAll();
+		Greeting greetingToEdit = null;
+		for(int index=0;index<greetingList.size();index++)
+		{
+			if(greetingList.get(index).getMessage().contains(name1))
+			{
+				greetingToEdit=greetingList.get(index);
+				break;
+			}
+		}
+		String message=String.format(template,(name2.isEmpty())?"HEllo world":name2);
+		greetingToEdit.setMessage(message);
+		return greetingRepository.save(greetingToEdit);
+
+	}
+	
