@@ -46,10 +46,13 @@ public class GreetingController
         return greetingService.getGreetingById(id);
     }
     
-    @PostMapping("/post")
-    public Greeting sayHello(@RequestBody Greeting greeting)
+    //curl -X GET http://localhost:8080/greeting/greetinglist
+    @GetMapping("/greetinglist")
+    public List<Greeting> getGreetingList()
     {
-
+    	return greetingService.getGreetingList();
+    }
+    
         return new Greeting(greeting.getId(),greeting.getMessage());
     }
 	
