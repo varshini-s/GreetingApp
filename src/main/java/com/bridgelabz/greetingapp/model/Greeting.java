@@ -1,10 +1,22 @@
 package com.bridgelabz.greetingapp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="GREETINGS")
 public class Greeting 
 {
-	
+	@Id
 	private long id;
 	private String message;
+	
+	public Greeting()
+	{
+		id=0;
+		message="";
+	}
 	
 	public Greeting(long id, String message)
 	{
