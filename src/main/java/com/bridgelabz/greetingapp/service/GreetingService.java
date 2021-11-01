@@ -61,3 +61,24 @@ public class GreetingService implements IGreetingService
 
 	}
 	
+	@Override
+	public List<Greeting> deleteGreeting(String name)
+	{
+		List<Greeting> greetingList=greetingRepository.findAll();
+		Greeting greetingToDelete = null;
+		for(int index=0;index<greetingList.size();index++)
+		{
+			if(greetingList.get(index).getMessage().contains(name))
+			{
+				greetingToDelete=greetingList.get(index);
+				break;
+			}
+		}
+		
+		greetingRepository.delete(greetingToDelete);
+		return getGreetingList();
+	}
+
+
+
+}
