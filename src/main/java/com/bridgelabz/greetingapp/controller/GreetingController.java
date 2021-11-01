@@ -61,10 +61,13 @@ public class GreetingController
 		return greetingService.editGreeting(name1, name2);
     }
 
-    @PutMapping("put/{name}")
-    public Greeting sayHello(@PathVariable String name)
+    //curl -X DELETE localhost:8080/greeting/delete/Lisa -w "\n"
+    @DeleteMapping("/delete/{name}")
+    public List<Greeting> deleteGreeting(@PathVariable String name)
 	{
         
-		return new Greeting(counter.incrementAndGet(),String.format(template, name));
+		return greetingService.deleteGreeting(name);
     }
+    
+
 }
