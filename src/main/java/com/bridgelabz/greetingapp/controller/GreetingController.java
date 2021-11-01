@@ -1,7 +1,10 @@
 package com.bridgelabz.greetingapp.controller;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bridgelabz.greetingapp.model.Greeting;
+import com.bridgelabz.greetingapp.model.User;
+import com.bridgelabz.greetingapp.service.IGreetingService;
 
 
 
@@ -33,10 +38,12 @@ public class GreetingController
         return greetingService.addGreeting(user);
     }
 
-    @GetMapping("/param/{name}")
-    public Greeting sayHelloParam(@PathVariable String name)
+    //curl -X GET http://localhost:8080/greeting/greetingid/?id=2
+    @GetMapping(value = {"/greetingid"})
+    public Greeting getGreetingByID(@RequestParam(value="id",defaultValue="World") long id)
     {
-        return new Greeting(counter.incrementAndGet(),String.format(template, name));
+        
+        return greetingService.getGreetingById(id);
     }
     
     @PostMapping("/post")
