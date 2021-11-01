@@ -53,9 +53,14 @@ public class GreetingController
     	return greetingService.getGreetingList();
     }
     
-        return new Greeting(greeting.getId(),greeting.getMessage());
+    //curl -X PUT localhost:8080/greeting/update/Ted/Lisa -w "\n"
+    @PutMapping("/update/{name1}/{name2}")
+    public Greeting editGreeting(@PathVariable String name1, @PathVariable String name2)
+	{
+        
+		return greetingService.editGreeting(name1, name2);
     }
-	
+
     @PutMapping("put/{name}")
     public Greeting sayHello(@PathVariable String name)
 	{
