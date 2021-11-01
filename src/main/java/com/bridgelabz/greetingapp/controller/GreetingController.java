@@ -21,6 +21,17 @@ public class GreetingController
     private static final String template="Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    @Autowired
+    private IGreetingService greetingService;
+    
+    // curl -X POST http://localhost:8080/greeting/add?name=Ted
+    @PostMapping(value = {"","/","/add"})
+    public Greeting greeting(@RequestParam(value="name",defaultValue="World") String name)
+    {
+        User user = new User();
+        user.setFirstName(name);
+        return greetingService.addGreeting(user);
+    }
 
     @GetMapping("/param/{name}")
     public Greeting sayHelloParam(@PathVariable String name)
